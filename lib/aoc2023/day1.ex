@@ -18,11 +18,6 @@ defmodule Aoc2023.Day1 do
     |> join_and_sum()
   end
 
-  def contained_substrings(string, substrings) do
-    substrings
-    |> Enum.filter(&String.contains?(string, &1))
-  end
-
   defp find_substrings_in_order(string, substrings) do
     string
     |> String.graphemes()
@@ -34,7 +29,7 @@ defmodule Aoc2023.Day1 do
         {[String.to_integer(c) | found], ""}
       else
         if String.contains?(new, substrings) do
-          [n] = contained_substrings(new, substrings)
+          [n] = Aoc2023.Util.String.contained_substrings(new, substrings)
           {[Aoc2023.Util.Number.parse_written_digit(n) | found], c}
         else
           {found, new}
